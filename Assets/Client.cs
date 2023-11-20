@@ -29,6 +29,7 @@ public class Client : MonoBehaviour
     private void OnTransportFailure()
     {
         Debug.Log("Transport Failure in the Network Manager");
+        Output.Instance.Log("Transport failure detected!");
     }
 
     private void OnClientDisconnected(ulong obj)
@@ -39,6 +40,7 @@ public class Client : MonoBehaviour
     private void OnClientConnected(ulong obj)
     {
         Debug.Log("Client Connected! " + obj);
+        Output.Instance.Log("Welcome to Valgnar!");
     }
 
     private void InitializeConnection()
@@ -62,7 +64,7 @@ public class Client : MonoBehaviour
 
     IEnumerator GetServer(UnityWebRequest request, Action<Server> callback = null)
     {
-        Debug.Log("Sending Web Request");
+        Output.Instance.Log("Locating Valgnar...");
             // Request and wait for the desired page.
             yield return request.SendWebRequest();
 
@@ -74,7 +76,7 @@ public class Client : MonoBehaviour
                     break;
 
                 default:
-                Debug.Log(request.downloadHandler.error);
+                Output.Instance.Log(request.downloadHandler.error);
                 break;
             }
      
