@@ -55,8 +55,6 @@ public class ZoneManager : NetworkBehaviour
         {
             return;
         }
-        
-
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -116,27 +114,8 @@ public class ZoneManager : NetworkBehaviour
             }
         }
 
-            //HIDE NETWORK OBJECTS IN THE OLD ZONE TO THE PLAYER THAT HAS LEFT
-        //if (!isFirstSpawn)
-        //{
-        //    Debug.Log("Hiding NetworkObjects in old zone");
-        //    foreach (Player player in zones[initialX, initialY].GetComponentsInChildren<Player>())
-        //    {
-        //        if (player.OwnerClientId == clientId)
-        //        {
-        //            Debug.Log("Owner Client ID is same as clientId");
-        //            continue;
-        //        }
-        //        Debug.Log(player.name);
-        //        if (player.NetworkObject.IsNetworkVisibleTo(clientId))
-        //        {
-        //            player.NetworkObject.NetworkHide(clientId);
-        //        }
-        //    }
-        //}
-
-
         //MAKE NEW PLAYER VISIBLE TO EXISTING PLAYERS IN THE ZONE
+        List<ulong> playersToNotifyJoin = new List<ulong>();
         foreach (Player player in zones[posX, posY].GetComponentsInChildren<Player>())
         {
             if (player.OwnerClientId == clientId)
@@ -144,15 +123,22 @@ public class ZoneManager : NetworkBehaviour
                 continue;
             }
             requestedPlayer.NetworkObject.NetworkShow(player.OwnerClientId);
+            playersToNotifyJoin.Add(player.OwnerClientId);
         }
 
 
-
-        RemovePlayerFromRoomClientRpc(requestedPlayer.username.Value.ToString(), zones[initialX,initialY].zoneName, CreateClientRpcParams(playersToNotifyLeft.ToArray()));
+        NotifyPlayersOfJoinClientRpc(requestedPlayer.username.Value.ToString(), CreateClientRpcParams(playersToNotifyJoin.ToArray()));
+        RemovePlayerFromRoomClientRpc(requestedPlayer.username.Value.ToString(), CreateClientRpcParams(playersToNotifyLeft.ToArray()));
 
         requestedPlayer.posX = posX;
         requestedPlayer.posY = posY;
         OutputZoneInformationClientRpc(networkObjectCounter, posX, posY, CreateClientRpcParams(clientId));
+    }
+
+    [ClientRpc]
+    private void NotifyPlayersOfJoinClientRpc(string playerJoinName, ClientRpcParams clientRpcParams)
+    {
+        Output.Instance.Log($"{playerJoinName} has entered the zone.");
     }
 
     public void OutputZoneInformation()
@@ -184,9 +170,30 @@ public class ZoneManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RemovePlayerFromRoomClientRpc(string playerLeftName, string zoneNameLeft, ClientRpcParams clientRpcParams)
+    public void RemovePlayerFromRoomClientRpc(string playerLeftName, ClientRpcParams clientRpcParams)
     {
         Output.Instance.Log($"{playerLeftName} has exited the zone.");
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SendPlayerMessageToZoneServerRpc(string messageToSend, ulong clientId)
+    {
+
+        Player sentPlayer = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<Player>();
+        int posX = sentPlayer.posX;
+        int posY = sentPlayer.posY;
+
+        List<ulong> playersToSendMessage = new List<ulong>();
+        foreach (Player player in zones[posX, posY].GetComponentsInChildren<Player>())
+        {
+            if (player.OwnerClientId == clientId)
+            {
+                continue;
+            }
+            playersToSendMessage.Add(player.OwnerClientId);
+        }
+        NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<Player>().OutputToConsoleClientRPC(messageToSend, CreateClientRpcParams(playersToSendMessage.ToArray()));
     }
 
     private IEnumerator WaitForNetworkObjectSyncAndOutputZoneInformation(int networkObjectCounter)
@@ -204,6 +211,8 @@ public class ZoneManager : NetworkBehaviour
         OutputZoneInformation();
 
     }
+
+
 
     public ClientRpcParams CreateClientRpcParams(ulong clientId)
     {

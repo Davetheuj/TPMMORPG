@@ -47,6 +47,7 @@ public class InputManager : MonoBehaviour
         else //Chat to be sent in game
         {
             Output.Instance.Log(inputField.text);
+            ZoneManager.Instance.SendPlayerMessageToZoneServerRpc(inputField.text, NetworkManager.Singleton.LocalClientId);
             inputField.text = "";
         }       
     }
