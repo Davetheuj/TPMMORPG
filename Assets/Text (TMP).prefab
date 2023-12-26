@@ -67,7 +67,20 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 11/20/2023 12:11:33 AM
+  m_text: '[20:53] The grassy knoll spreads before you, painted with dots of windswept
+    wildflowers in tender violets and yellows and oranges. The sky stretches above,
+    embracing the steadfast horizon.
+
+    ----------PLAYERS----------
+
+    Player
+    2
+
+
+    ----------ITEMS----------
+
+
+    ----------ROUTES----------'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -106,7 +119,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 15.18
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 55
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
