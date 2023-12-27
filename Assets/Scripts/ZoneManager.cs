@@ -141,7 +141,7 @@ public class ZoneManager : NetworkBehaviour
         Output.Instance.Log($"{playerJoinName} has entered the zone.");
     }
 
-    public void OutputZoneInformation()
+    public void OutputCurrentPlayerZoneInformation()
     {
         string output = "";
         output += zones[PlayerManager.Instance.localPlayer.posX, PlayerManager.Instance.localPlayer.posY].description;
@@ -155,6 +155,25 @@ public class ZoneManager : NetworkBehaviour
         }
         output += $"\n\n----------ITEMS----------";
         output += $"\n\n----------ROUTES----------";
+        Output.Instance.Log(output);
+
+    }
+
+    public void OutputZoneInformation(int x, int y)
+    {
+        string output = "";
+        if (
+            (x > zones.GetLength(0) - 1) ||
+            (x < 0) ||
+            (y > zones.GetLength(1) - 1) ||
+            (y < 0))
+        {
+            output += "You see vast swirling mists and the great cosmic dark speckled with hot jewels from the fire of the gods flung out as if from a burning brazier!";
+        }
+        else
+        {
+            output += zones[x, y].zoneName;
+        }
         Output.Instance.Log(output);
 
     }
@@ -208,7 +227,7 @@ public class ZoneManager : NetworkBehaviour
         }
         Debug.Log($"NetworkObjectCondition: {networkObjectCounter < this.networkObjectCounter}");
         Debug.Log($"TimerCondition: {timer < maxTime}");
-        OutputZoneInformation();
+        OutputCurrentPlayerZoneInformation();
 
     }
 

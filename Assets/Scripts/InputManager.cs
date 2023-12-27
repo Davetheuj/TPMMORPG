@@ -26,62 +26,95 @@ public class InputManager : MonoBehaviour
                 inputField.ActivateInputField();
                 return;
             }
-            ProcessAction(inputField.text);
+            ProcessCommand(inputField.text);
             inputField.ActivateInputField();
         }      
     }
 
-    void ProcessAction(string action)
+    void ProcessCommand(string command)
     {
-        action = action.Trim();
-        string actionL = action.ToLower();
+        command = command.Trim().ToLower();
 
-        if (actionL.StartsWith("look"))
+        if (command.StartsWith("look"))
         {
-            LookAction(actionL);
+            LookCommand(command);
         }
-        else if (actionL.StartsWith("walk"))
+        else if (command.StartsWith("walk"))
         {
-            WalkAction(actionL);
+            WalkCommand(command);
+        }
+        else if (command.StartsWith("help"))
+        {
+            HelpCommand(command);
         }
         else //Chat to be sent in game
         {
-            Output.Instance.Log(inputField.text);
-            ZoneManager.Instance.SendPlayerMessageToZoneServerRpc(inputField.text, NetworkManager.Singleton.LocalClientId);
-            inputField.text = "";
-        }       
+            Output.Instance.Log($"<color=#FACA59>[{PlayerManager.Instance.localPlayer.username.Value}] {inputField.text}");
+            ZoneManager.Instance.SendPlayerMessageToZoneServerRpc($"[{PlayerManager.Instance.localPlayer.username.Value}] {inputField.text}", NetworkManager.Singleton.LocalClientId);
+        }
+        inputField.text = "";
     }
 
-    private void LookAction(string action)
+    private void LookCommand(string command)
     {
-        if (action.Contains("here"))
+        string output = $"<color=#77FB59>{command}</color>";
+        Output.Instance.Log(output);
+        Player localPlayer = PlayerManager.Instance.localPlayer;
+        if (command.Contains("here"))
         {
-            PlayerManager.Instance.zoneManager.OutputZoneInformation();
+            ZoneManager.Instance.OutputCurrentPlayerZoneInformation();
+        }
+        else if (command.Contains("east"))
+        {
+            ZoneManager.Instance.OutputZoneInformation(localPlayer.posX+1, localPlayer.posY);
+        }
+        else if (command.Contains("west"))
+        {
+            ZoneManager.Instance.OutputZoneInformation(localPlayer.posX - 1, localPlayer.posY);
+        }
+        else if (command.Contains("north"))
+        {
+            ZoneManager.Instance.OutputZoneInformation(localPlayer.posX, localPlayer.posY + 1);
+        }
+        else if (command.Contains("south"))
+        {
+            ZoneManager.Instance.OutputZoneInformation(localPlayer.posX, localPlayer.posY - 1);
         }
         else
         {
             Output.Instance.Log("Invalid input - did you mean 'Look here' or 'Look North'?");
         }
-        inputField.text = "";
     }
 
-    private void WalkAction(string action)
+    private void HelpCommand(string command)
     {
+        string output = $"<color=#77FB59>{command}</color>";
+        output += "\n----------COMMANDS----------" +
+            "\n\n<command [variable]> : description : example" +
+            "\n\n<look [direction]> : Obtains zone information in the specified direction, including the current zone with 'here': look here" +
+            "\n\n<walk [direction]> : Moves your player in the specified direction : walk north";
+        
+        Output.Instance.Log(output);
+    }
 
+    private void WalkCommand(string command)
+    {
+        string output = $"<color=#77FB59>{command}</color>";
+        Output.Instance.Log(output);
         Player localPlayer = PlayerManager.Instance.localPlayer;
-        if (action.Contains("east"))
+        if (command.Contains("east"))
         {
             ZoneManager.Instance.RequestZoneChangeServerRpc(localPlayer.posX + 1, localPlayer.posY, NetworkManager.Singleton.LocalClientId);
         }
-       else if (action.Contains("west"))
+       else if (command.Contains("west"))
         {
             ZoneManager.Instance.RequestZoneChangeServerRpc(localPlayer.posX - 1, localPlayer.posY, NetworkManager.Singleton.LocalClientId);
         }
-        else if (action.Contains("north"))
+        else if (command.Contains("north"))
         {
             ZoneManager.Instance.RequestZoneChangeServerRpc(localPlayer.posX, localPlayer.posY + 1, NetworkManager.Singleton.LocalClientId);
         }
-        else if (action.Contains("south"))
+        else if (command.Contains("south"))
         {
             ZoneManager.Instance.RequestZoneChangeServerRpc(localPlayer.posX, localPlayer.posY - 1, NetworkManager.Singleton.LocalClientId);
         }
@@ -89,7 +122,6 @@ public class InputManager : MonoBehaviour
         {
             Output.Instance.Log("Invalid input - did you mean 'Walk North' or 'Walk East?");
         }
-        inputField.text = "";
     }
 
 

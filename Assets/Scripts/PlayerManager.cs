@@ -8,7 +8,6 @@ public class PlayerManager : MonoBehaviour
     
     public bool isAuthenticated;
     public Player localPlayer;
-    public ZoneManager zoneManager;
 
 
     private void Awake()
@@ -25,7 +24,6 @@ Destroy(this);
             Instance = this;
 
         }
-        zoneManager = GameObject.Find("Zones").GetComponent<ZoneManager>();
 #endif
     }
 
