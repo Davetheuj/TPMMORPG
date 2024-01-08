@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ZoneManager : NetworkBehaviour
 {
 
     public Zone[,] zones;
     public int networkObjectCounter = 0;
+    public GameObject zoneImage;
     
     public static ZoneManager Instance { get; private set; }
 
@@ -143,6 +145,9 @@ public class ZoneManager : NetworkBehaviour
 
     public void OutputCurrentPlayerZoneInformation()
     {
+#if !DEDICATED_SERVER
+        zoneImage.GetComponent<Image>().sprite = zones[PlayerManager.Instance.localPlayer.posX, PlayerManager.Instance.localPlayer.posY].zoneImage;
+#endif
         string output = "";
         output += zones[PlayerManager.Instance.localPlayer.posX, PlayerManager.Instance.localPlayer.posY].description;
         output += "\n----------PLAYERS----------";

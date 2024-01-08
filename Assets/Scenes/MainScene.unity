@@ -215,6 +215,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &156193747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 156193748}
+  - component: {fileID: 156193750}
+  - component: {fileID: 156193749}
+  m_Layer: 0
+  m_Name: Zone0 (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &156193748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156193747}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2121069062}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &156193749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156193747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2850521064
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 0
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 0
+--- !u!114 &156193750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156193747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f005734db5825a459ef41b8bd81f1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneName: Farmland Before Fairshire
+  description: Quaint agricultural land in the 1500s under a cheerful blue sky and
+    warm yellow sun.
+  posX: 7
+  posY: 6
+  zoneImage: {fileID: 21300000, guid: 278dae8dae5ef6a4396114e08396965d, type: 3}
 --- !u!1 &179984806
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ProtocolType: 0
-  m_UseWebSockets: 1
+  m_UseWebSockets: 0
   m_UseEncryption: 0
   m_MaxPacketQueueSize: 128
   m_MaxPayloadSize: 6144
@@ -258,7 +329,7 @@ MonoBehaviour:
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
     Address: 127.0.0.1
-    Port: 7777
+    Port: 9000
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0
@@ -372,7 +443,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAuthenticated: 0
   localPlayer: {fileID: 0}
-  zoneManager: {fileID: 0}
 --- !u!4 &183920491
 Transform:
   m_ObjectHideFlags: 0
@@ -1164,10 +1234,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f005734db5825a459ef41b8bd81f1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneName: Grassy Knoll
-  description: 1,0
-  posX: 1
-  posY: 0
+  zoneName: Cliffs on the Emerald Sea
+  description: A sharp cliff drops abruptly away in front of you, beyond which a
+    glimmering emerald sea stretches before you catching the light of a setting sun
+    with all of it's beautiful refracting colors.
+  posX: 8
+  posY: 7
+  zoneImage: {fileID: 21300000, guid: 9afe79e91585ec04aa91d2c04c7992d1, type: 3}
 --- !u!114 &956204745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1188,6 +1261,77 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 0
+--- !u!1 &1203419291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1203419292}
+  - component: {fileID: 1203419294}
+  - component: {fileID: 1203419293}
+  m_Layer: 0
+  m_Name: Zone0 (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1203419292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203419291}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2121069062}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1203419293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203419291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3799124617
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 0
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 0
+--- !u!114 &1203419294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203419291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f005734db5825a459ef41b8bd81f1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneName: Clear Brook In The Forest
+  description: A small clear brook winds its way through large granite boulders and
+    thick verdant forest.
+  posX: 7
+  posY: 10
+  zoneImage: {fileID: 21300000, guid: 229cb5dfcfe40a349987b40db3216beb, type: 3}
 --- !u!1 &1332172603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,10 +1523,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f005734db5825a459ef41b8bd81f1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneName: Grassy Knoll
-  description: 0,1
-  posX: 0
-  posY: 1
+  zoneName: Path Through The Trees
+  description: A well-tread path through a thick dark forest, mighty vines cling
+    to moss-laden oak trees.
+  posX: 7
+  posY: 8
+  zoneImage: {fileID: 21300000, guid: 17d807ea057d48b41967c0e7b1b4d3ea, type: 3}
 --- !u!114 &1592248057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,10 +1797,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f005734db5825a459ef41b8bd81f1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneName: Grassy Knoll
-  description: 2,0
-  posX: 2
-  posY: 0
+  zoneName: A Sandy Beach
+  description: A sandy beach strewn with rocks and cliffs, looking out over an emerald
+    sea into a sunset.
+  posX: 9
+  posY: 7
+  zoneImage: {fileID: 21300000, guid: 30be7fad71fab33478982be74ab3585b, type: 3}
 --- !u!114 &1664849928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1779,6 +1927,76 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1964662105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1964662106}
+  - component: {fileID: 1964662108}
+  - component: {fileID: 1964662107}
+  m_Layer: 0
+  m_Name: Zone0 (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1964662106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964662105}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2121069062}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1964662107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964662105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2374312172
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 0
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 0
+--- !u!114 &1964662108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964662105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f005734db5825a459ef41b8bd81f1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneName: The Lookout
+  description: A wooden lookout on top of a hill overlooking a mountainous region.
+  posX: 7
+  posY: 11
+  zoneImage: {fileID: 21300000, guid: 650f2647ad49ea143892a12b665ec379, type: 3}
 --- !u!1 &1978418548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,10 +2042,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f005734db5825a459ef41b8bd81f1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneName: Grassy Knoll
-  description: 0,2
-  posX: 0
-  posY: 2
+  zoneName: The Old Grotto
+  description: A small circular stone building that has been decayed over time by
+    weather, it is surrounded by a thick forest grove.
+  posX: 7
+  posY: 9
+  zoneImage: {fileID: 21300000, guid: 5cb299a0a6019b34a9ccb77c6ced7901, type: 3}
 --- !u!114 &1978418551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2032,8 +2252,9 @@ MonoBehaviour:
   description: The grassy knoll spreads before you, painted with dots of windswept
     wildflowers in tender violets and yellows and oranges. The sky stretches above,
     embracing the steadfast horizon.
-  posX: 0
-  posY: 0
+  posX: 7
+  posY: 7
+  zoneImage: {fileID: 21300000, guid: 726d751e885ea31499ceb6a36656d864, type: 3}
 --- !u!114 &2099597200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2085,6 +2306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkObjectCounter: 0
+  zoneImage: {fileID: 2135682092}
 --- !u!4 &2121069062
 Transform:
   m_ObjectHideFlags: 0
@@ -2102,6 +2324,9 @@ Transform:
   - {fileID: 1664849926}
   - {fileID: 1592248055}
   - {fileID: 1978418549}
+  - {fileID: 1203419292}
+  - {fileID: 156193748}
+  - {fileID: 1964662106}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2183,8 +2408,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 726d751e885ea31499ceb6a36656d864, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4

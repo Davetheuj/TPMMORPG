@@ -47,7 +47,7 @@ public class Client : MonoBehaviour
    
     private void InitializeConnection()
     {
-#if LOCAL_CLIENT
+#if LOCAL_CLIENT || UNITY_WEBGL
         NetworkManager.Singleton.StartClient();
 #else
         string keyId = "eadd3cca-a705-4336-95be-4f82f5fe6c69";
@@ -79,6 +79,7 @@ public class Client : MonoBehaviour
                 case UnityWebRequest.Result.Success:
                 Output.Instance.Log("Successful web request.");
                 ListServers listServers = JsonUtility.FromJson<ListServers>("{\"serverList\":" + request.downloadHandler.text + "}");
+                Debug.Log("Connecting to: " + listServers.serverList[0].ip);
                 callback.Invoke(listServers.serverList[0]);
                     break;
 

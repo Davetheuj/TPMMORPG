@@ -55,8 +55,7 @@ public class ServerManager : MonoBehaviour
 #if UNITY_EDITOR || LOCAL_CLIENT
         NetworkManager.Singleton.StartServer();
     }
-#endif
-#if DEDICATED_SERVER && !UNITY_EDITOR
+#elif DEDICATED_SERVER && !UNITY_EDITOR
         if (UnityServices.State != ServicesInitializationState.Initialized)
         {
             Debug.Log("!!!INITIALIZING UNITY SERVICES!!!");
@@ -94,7 +93,8 @@ public class ServerManager : MonoBehaviour
         }
 
 }
-
+#else
+}
 #endif
     private void StartAllocation()
     {
@@ -201,7 +201,7 @@ public class ServerManager : MonoBehaviour
         string ipv4Address = "0.0.0.0";
         ushort port = serverConfig.Port;
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(ipv4Address, port, "0.0.0.0");
-
+       // NetworkManager.Singleton.GetComponent<UnityTransport>().so
         NetworkManager.Singleton.StartServer();
 
         await MultiplayService.Instance.ReadyServerForPlayersAsync();
