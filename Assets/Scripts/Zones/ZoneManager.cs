@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -73,46 +74,92 @@ public class ZoneManager : NetworkBehaviour
             NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<Player>().OutputToConsoleClientRPC("You are unable to move into the requested zone!", CreateClientRpcParams(clientId));
             return;
         }
-
-        if (!NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<NetworkObject>().TrySetParent(zones[posX, posY].transform))
+        if (zones[posX, posY] == null)
         {
             NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<Player>().OutputToConsoleClientRPC("You are unable to move into the requested zone!", CreateClientRpcParams(clientId));
             return;
         }
 
+       else if (!NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<NetworkObject>().TrySetParent(zones[posX, posY].transform))
+        {
+            NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<Player>().OutputToConsoleClientRPC("You are unable to move into the requested zone!", CreateClientRpcParams(clientId));
+            return;
+        }
+
+        
         Player requestedPlayer = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<Player>();
         int initialX = requestedPlayer.posX;
         int initialY = requestedPlayer.posY;
-       
 
+        //Setting the directional text for notifications
+        string directionFrom = "";
+        string directionTo = "";
+        
+        if(initialX > posX)
+        {
+            directionFrom = "East";
+            directionTo = "West";
+        }
+        else if( initialX < posX)
+        {
+            directionFrom = "West";
+            directionTo = "East";
+        }
+        else if (initialY < posY)
+        {
+            directionFrom = "South";
+            directionTo = "North";
+        }
+        else 
+        {
+            directionFrom = "North";
+            directionTo = "South";
+        }
+
+
+
+        //Hide Npcs and Objects in the old zone from the local client
+        foreach (InteractableNetworkedObject no in zones[initialX, initialY].GetComponentsInChildren<InteractableNetworkedObject>())
+        {
+            if (no.OwnerClientId == clientId)
+            {
+                continue;
+            }
+            if (no.NetworkObject.IsNetworkVisibleTo(clientId))
+            {
+                Debug.Log($"Hiding {no.name} from LocalCLient({clientId})");
+                no.NetworkObject.NetworkHide(clientId);
+            }
+        }
+
+            //SHOW NETWORK OBJECTS IN THE NEW ZONE TO THE PLAYER THAT HAS JOINED
+            int networkObjectCounter = 0;
+        foreach (InteractableNetworkedObject no in zones[posX, posY].GetComponentsInChildren<InteractableNetworkedObject>())
+        {
+            if (no.NetworkObject.OwnerClientId == clientId)
+            {
+                continue;
+            }
+            Debug.Log(no.name);
+            if (!no.NetworkObject.IsNetworkVisibleTo(clientId))
+            {
+                networkObjectCounter++;
+                no.NetworkObject.NetworkShow(clientId);
+            }
+        }
         //NOTIFY PLAYERS IN THE OLD ZONE THE PLAYER HAS LEFT
         List<ulong> playersToNotifyLeft = new List<ulong>();
         foreach (Player player in zones[initialX, initialY].GetComponentsInChildren<Player>())
         {
             if(player.OwnerClientId == clientId)
             {
-                //Debug.Log("Owner Client ID is same as clientId");
                 continue;
             }
-           
+
             if (requestedPlayer.NetworkObject.IsNetworkVisibleTo(player.OwnerClientId))
             {
-                Debug.Log($"Hiding {player.username.Value} from {player.username.Value}.");
-                player.NetworkObject.NetworkHide(clientId);
-                requestedPlayer.NetworkObject.NetworkHide(player.OwnerClientId);
+                requestedPlayer.NetworkObject.NetworkHide(player.OwnerClientId); //hides the local player from the other clients
                 playersToNotifyLeft.Add(player.OwnerClientId);
-            }
-        }
-
-        //SHOW NETWORK OBJECTS IN THE NEW ZONE TO THE PLAYER THAT HAS JOINED
-        int networkObjectCounter = 0;
-        foreach (NetworkObject no in zones[posX, posY].GetComponentsInChildren<NetworkObject>())
-        {
-            Debug.Log(no.name);
-            if (!no.IsNetworkVisibleTo(clientId))
-            {
-                networkObjectCounter++;
-                no.NetworkShow(clientId);
             }
         }
 
@@ -129,8 +176,8 @@ public class ZoneManager : NetworkBehaviour
         }
 
 
-        NotifyPlayersOfJoinClientRpc(requestedPlayer.username.Value.ToString(), CreateClientRpcParams(playersToNotifyJoin.ToArray()));
-        RemovePlayerFromRoomClientRpc(requestedPlayer.username.Value.ToString(), CreateClientRpcParams(playersToNotifyLeft.ToArray()));
+        NotifyPlayersOfJoinClientRpc(requestedPlayer.username.Value.ToString(), directionFrom, CreateClientRpcParams(playersToNotifyJoin.ToArray()));
+        RemovePlayerFromRoomClientRpc(requestedPlayer.username.Value.ToString(), directionTo, CreateClientRpcParams(playersToNotifyLeft.ToArray()));
 
         requestedPlayer.posX = posX;
         requestedPlayer.posY = posY;
@@ -138,9 +185,9 @@ public class ZoneManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void NotifyPlayersOfJoinClientRpc(string playerJoinName, ClientRpcParams clientRpcParams)
+    private void NotifyPlayersOfJoinClientRpc(string playerJoinName, string direction, ClientRpcParams clientRpcParams)
     {
-        Output.Instance.Log($"{playerJoinName} has entered the zone.");
+        Output.Instance.Log($"{playerJoinName} has entered the zone from the {direction}.");
     }
 
     public void OutputCurrentPlayerZoneInformation()
@@ -148,26 +195,47 @@ public class ZoneManager : NetworkBehaviour
 #if !DEDICATED_SERVER
         zoneImage.GetComponent<Image>().sprite = zones[PlayerManager.Instance.localPlayer.posX, PlayerManager.Instance.localPlayer.posY].zoneImage;
 #endif
+
+        //Description
         string output = "";
         output += zones[PlayerManager.Instance.localPlayer.posX, PlayerManager.Instance.localPlayer.posY].description;
-        output += "\n----------PLAYERS----------";
-        foreach (Player player in zones[PlayerManager.Instance.localPlayer.posX, PlayerManager.Instance.localPlayer.posY].GetComponentsInChildren<Player>())
+
+        //PLAYERS     
+        Player[] tempPlayers = zones[PlayerManager.Instance.localPlayer.posX, PlayerManager.Instance.localPlayer.posY].GetComponentsInChildren<Player>();
+        if (tempPlayers.Length > 1)
         {
-            if (player.username != PlayerManager.Instance.localPlayer.username)
+            output += "\n\n----------PLAYERS----------";
+            foreach (Player player in tempPlayers)
             {
-                output += $"\n{player.username.Value}";
+                if (player.username != PlayerManager.Instance.localPlayer.username)
+                {
+                    output += $"\n{player.username.Value}";
+                }
             }
         }
-        output += $"\n\n----------ITEMS----------";
-        output += $"\n\n----------ROUTES----------";
-        Output.Instance.Log(output);
 
+        //NPCs     
+        NPC[] npcs = zones[PlayerManager.Instance.localPlayer.posX, PlayerManager.Instance.localPlayer.posY].GetComponentsInChildren<NPC>();
+        if (npcs.Length > 1)
+        {
+            output += "\n\n----------NPCs----------";
+            foreach (NPC npc in npcs)
+            {    
+               output += $"\n{npc.npcName}";          
+            }
+        }
+
+        Output.Instance.Log(output);
     }
 
     public void OutputZoneInformation(int x, int y)
     {
         string output = "";
-        if (
+        if (zones[x, y] == null)
+        {
+            output += "You see vast swirling mists and the great cosmic dark speckled with hot jewels from the fire of the gods flung out as if from a burning brazier!";
+        }
+        else if (
             (x > zones.GetLength(0) - 1) ||
             (x < 0) ||
             (y > zones.GetLength(1) - 1) ||
@@ -194,9 +262,9 @@ public class ZoneManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RemovePlayerFromRoomClientRpc(string playerLeftName, ClientRpcParams clientRpcParams)
+    public void RemovePlayerFromRoomClientRpc(string playerLeftName, string direction, ClientRpcParams clientRpcParams)
     {
-        Output.Instance.Log($"{playerLeftName} has exited the zone.");
+        Output.Instance.Log($"{playerLeftName} has exited the zone to the {direction}.");
     }
 
 
@@ -236,7 +304,10 @@ public class ZoneManager : NetworkBehaviour
 
     }
 
-
+    public Player[] GetPlayersInZone(int x, int y)
+    {
+        return zones[x, y].GetComponentsInChildren<Player>();
+    }
 
     public ClientRpcParams CreateClientRpcParams(ulong clientId)
     {

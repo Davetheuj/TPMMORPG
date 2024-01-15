@@ -225,6 +225,8 @@ public class ServerManager : MonoBehaviour
         Player player = playerObj.GetComponent<Player>();
         playerObj.GetComponent<NetworkObject>().SpawnAsPlayerObject(obj);
         playerObj.GetComponent<NetworkObject>().NetworkShow(obj);
+        player.currentHealth.Value = 100;
+        player.maxHealth.Value = 100;
         player.username.Value = $"Player {obj}";
         // player.transform.parent = ZoneManager.Instance.zones[player.posX, player.posY].transform;
     }
@@ -249,7 +251,7 @@ public class ServerManager : MonoBehaviour
 #endif
 }
 
-    [Serializable]
+[Serializable]
  public class TokenExchangeResponse
 {
     public string accessToken;

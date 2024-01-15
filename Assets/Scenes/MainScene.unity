@@ -225,7 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 156193748}
   - component: {fileID: 156193750}
-  - component: {fileID: 156193749}
+  - component: {fileID: 156193751}
   m_Layer: 0
   m_Name: Zone0 (6)
   m_TagString: Untagged
@@ -248,26 +248,6 @@ Transform:
   m_Father: {fileID: 2121069062}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &156193749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 156193747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2850521064
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 0
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 0
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 0
 --- !u!114 &156193750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +266,29 @@ MonoBehaviour:
   posX: 7
   posY: 6
   zoneImage: {fileID: 21300000, guid: 278dae8dae5ef6a4396114e08396965d, type: 3}
+  networkPrefabs:
+  - {fileID: 1009278818020237392, guid: 91098d358c774d043a1433a31064166d, type: 3}
+  - {fileID: 1009278818020237392, guid: ed9bc8a2a6b21544a896abddfc1fe8a0, type: 3}
+--- !u!114 &156193751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156193747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2043248912
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 0
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &179984806
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &354752609
@@ -567,7 +570,7 @@ MonoBehaviour:
     m_Top: 4
     m_Bottom: 4
   m_ChildAlignment: 1
-  m_Spacing: 10
+  m_Spacing: 22
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -1241,6 +1244,7 @@ MonoBehaviour:
   posX: 8
   posY: 7
   zoneImage: {fileID: 21300000, guid: 9afe79e91585ec04aa91d2c04c7992d1, type: 3}
+  networkPrefabs: []
 --- !u!114 &956204745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1260,7 +1264,7 @@ MonoBehaviour:
   SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
-  AutoObjectParentSync: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1203419291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,7 +1275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1203419292}
   - component: {fileID: 1203419294}
-  - component: {fileID: 1203419293}
+  - component: {fileID: 1203419295}
   m_Layer: 0
   m_Name: Zone0 (5)
   m_TagString: Untagged
@@ -1294,26 +1298,6 @@ Transform:
   m_Father: {fileID: 2121069062}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1203419293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203419291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3799124617
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 0
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 0
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 0
 --- !u!114 &1203419294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1332,6 +1316,27 @@ MonoBehaviour:
   posX: 7
   posY: 10
   zoneImage: {fileID: 21300000, guid: 229cb5dfcfe40a349987b40db3216beb, type: 3}
+  networkPrefabs: []
+--- !u!114 &1203419295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203419291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 203389996
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 0
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1332172603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,7 +1376,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.09222305}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 7.4780006}
+  m_SizeDelta: {x: 0, y: 3.739}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1332172605
 MonoBehaviour:
@@ -1529,6 +1534,7 @@ MonoBehaviour:
   posX: 7
   posY: 8
   zoneImage: {fileID: 21300000, guid: 17d807ea057d48b41967c0e7b1b4d3ea, type: 3}
+  networkPrefabs: []
 --- !u!114 &1592248057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1548,7 +1554,7 @@ MonoBehaviour:
   SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
-  AutoObjectParentSync: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1594622711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,7 +1593,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -8.959961, y: 0}
-  m_SizeDelta: {x: 14.2, y: -11.7704}
+  m_SizeDelta: {x: 14.2, y: -22.8528}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1594622713
 MonoBehaviour:
@@ -1803,6 +1809,7 @@ MonoBehaviour:
   posX: 9
   posY: 7
   zoneImage: {fileID: 21300000, guid: 30be7fad71fab33478982be74ab3585b, type: 3}
+  networkPrefabs: []
 --- !u!114 &1664849928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1822,7 +1829,7 @@ MonoBehaviour:
   SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
-  AutoObjectParentSync: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1683851768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,7 +1944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1964662106}
   - component: {fileID: 1964662108}
-  - component: {fileID: 1964662107}
+  - component: {fileID: 1964662109}
   m_Layer: 0
   m_Name: Zone0 (7)
   m_TagString: Untagged
@@ -1960,26 +1967,6 @@ Transform:
   m_Father: {fileID: 2121069062}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1964662107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964662105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2374312172
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 0
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 0
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 0
 --- !u!114 &1964662108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1997,6 +1984,27 @@ MonoBehaviour:
   posX: 7
   posY: 11
   zoneImage: {fileID: 21300000, guid: 650f2647ad49ea143892a12b665ec379, type: 3}
+  networkPrefabs: []
+--- !u!114 &1964662109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964662105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3802450386
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 0
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1978418548
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,6 +2056,7 @@ MonoBehaviour:
   posX: 7
   posY: 9
   zoneImage: {fileID: 21300000, guid: 5cb299a0a6019b34a9ccb77c6ced7901, type: 3}
+  networkPrefabs: []
 --- !u!114 &1978418551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2067,7 +2076,7 @@ MonoBehaviour:
   SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
-  AutoObjectParentSync: 0
+  AutoObjectParentSync: 1
 --- !u!1 &2016682684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,6 +2264,7 @@ MonoBehaviour:
   posX: 7
   posY: 7
   zoneImage: {fileID: 21300000, guid: 726d751e885ea31499ceb6a36656d864, type: 3}
+  networkPrefabs: []
 --- !u!114 &2099597200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2274,7 +2284,7 @@ MonoBehaviour:
   SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
-  AutoObjectParentSync: 0
+  AutoObjectParentSync: 1
 --- !u!1 &2121069060
 GameObject:
   m_ObjectHideFlags: 0
@@ -2345,7 +2355,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 3794413575
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 0
-  ActiveSceneSynchronization: 1
+  ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0

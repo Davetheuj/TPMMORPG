@@ -5,6 +5,7 @@ public class InputManager : MonoBehaviour
 {
 
     public TMPro.TMP_InputField inputField;
+    private string previousInput = "";
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,12 @@ public class InputManager : MonoBehaviour
             }
             ProcessCommand(inputField.text);
             inputField.ActivateInputField();
-        }      
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            inputField.text = previousInput;
+            inputField.caretPosition = inputField.text.Length;
+        }
     }
 
     void ProcessCommand(string command)
@@ -47,12 +53,31 @@ public class InputManager : MonoBehaviour
         {
             HelpCommand(command);
         }
+        else if (command.StartsWith("attack"))
+        {
+            AttackCommand(command);
+        }
         else //Chat to be sent in game
         {
             Output.Instance.Log($"<color=#FACA59>[{PlayerManager.Instance.localPlayer.username.Value}] {inputField.text}");
             ZoneManager.Instance.SendPlayerMessageToZoneServerRpc($"<color=#FACA59>[{PlayerManager.Instance.localPlayer.username.Value}] {inputField.text}", NetworkManager.Singleton.LocalClientId);
         }
+        previousInput = inputField.text;
         inputField.text = "";
+    }
+
+    private void AttackCommand(string command)
+    {
+        string output = $"<color=#77FB59>{command}</color>";
+        Output.Instance.Log(output);
+        Player localPlayer = PlayerManager.Instance.localPlayer;
+        foreach(Player player in ZoneManager.Instance.GetPlayersInZone(localPlayer.posX, localPlayer.posY))
+        {
+            if (command.Contains(player.username.Value.ToString().ToLower()))
+            {
+                player.DealDamageServerRPC(NetworkManager.Singleton.LocalClientId);
+            }
+        }
     }
 
     private void LookCommand(string command)
@@ -91,7 +116,8 @@ public class InputManager : MonoBehaviour
         string output = $"<color=#77FB59>{command}</color>";
         output += "\n----------COMMANDS----------" +
             "\n\n<command [variable]> : description : example" +
-            "\n\n<look [direction]> : Obtains zone information in the specified direction, including the current zone with 'here': look here" +
+            "\n\n<look [direction]> : Obtains zone information in the specified direction, including the current zone with 'here' : look here" +
+            "\n\n<attack [target's name (optional)]> : Attacks the specified target, if no target is specified, the default target will be attacked : Attack Player 1" +
             "\n\n<walk [direction]> : Moves your player in the specified direction : walk north";
         
         Output.Instance.Log(output);

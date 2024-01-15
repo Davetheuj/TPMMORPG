@@ -184,6 +184,10 @@ MonoBehaviour:
         byte0125: 0
   posX: 7
   posY: 7
+  maxHealth:
+    m_InternalValue: 0
+  currentHealth:
+    m_InternalValue: 0
 --- !u!114 &8147847864266968017
 MonoBehaviour:
   m_ObjectHideFlags: 0
